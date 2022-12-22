@@ -1,12 +1,12 @@
 import Currency from './3-currency';
 
-export default class Pricing {
+class Pricing {
   constructor(amount, currency) {
-    if (amount instanceof Number) {
-      this.amount = amount;
+    if (amount) {
+      this._amount = amount;
     }
     if (currency instanceof Currency) {
-      this.currency = currency;
+      this._currency = currency;
     }
   }
 
@@ -27,13 +27,12 @@ export default class Pricing {
   }
 
   displayFullPrice() {
-    return `${this.amount} ${this.currency} (${this.code})`;
+    return `${this._amount} ${this.currency.displayFullCurrency()}`;
   }
 
   static convertPrice(amount, conversionRate) {
-    if (amount && conversionRate instanceof Number) {
-      return amount * conversionRate;
-    }
-    throw new TypeError('Amount and Conversion Rate should be instances of Number');
+    return amount * conversionRate;
   }
 }
+
+export default Pricing;
